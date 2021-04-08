@@ -13,7 +13,7 @@ ms.devlang: dotNet
 ms.topic: get-started-article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 8/23/2017
+ms.date: 9/19/2017
 ms.author: subramar
 
 ---
@@ -127,9 +127,13 @@ Service Fabric provides Yoeman generators for creating Service Fabric applicatio
 
 After you have installed the generators, you should be able to create apps with guest executable or container services by running `yo azuresfguest` or `yo azuresfcontainer` respectively.
 
-## Install the necessary Java artifacts (optional, if you want to use the Java programming models)
+## Set up .NET Core 2.0 development
 
-To build Service Fabric services using Java, ensure you have JDK 1.8 installed along with Gradle which is used for running build tasks. The following snippet installs Open JDK 1.8 along with Gradle. The Service Fabric Java libraries are pulled from Maven.
+Install the [.NET Core 2.0 SDK for Ubuntu](https://www.microsoft.com/net/core#linuxubuntu) to start [creating C# Service Fabric applications](service-fabric-create-your-first-linux-application-with-csharp.md). Packages for .NET Core 2.0 Service Fabric applications are hosted on NuGet.org, currently in preview.
+
+## Set up Java development
+
+To build Service Fabric services using Java, install JDK 1.8 and Gradle to run build tasks. The following snippet installs Open JDK 1.8 along with Gradle. The Service Fabric Java libraries are pulled from Maven.
 
   ```bash
   sudo apt-get install openjdk-8-jdk-headless
@@ -138,7 +142,7 @@ To build Service Fabric services using Java, ensure you have JDK 1.8 installed a
 
 ## Install the Eclipse Neon plug-in (optional)
 
-You can install the Eclipse plug-in for Service Fabric from within the **Eclipse IDE for Java Developers**. You can use Eclipse to create Service Fabric guest executable applications and container applications in addition to Service Fabric Java applications.
+You can install the Eclipse plug-in for Service Fabric from within the Eclipse IDE for Java Developers. You can use Eclipse to create Service Fabric guest executable applications and container applications in addition to Service Fabric Java applications.
 
 1. In Eclipse, ensure that you have latest Eclipse Neon and the latest Buildship version (1.0.17 or later) installed. You can check the versions of installed components by selecting **Help** > **Installation Details**. You can update Buildship by using the instructions at [Eclipse Buildship: Eclipse Plug-ins for Gradle][buildship-update].
 
@@ -158,26 +162,28 @@ If you already have the Service Fabric Eclipse plug-in installed, make sure that
 
 For more information, see [Service Fabric plug-in for Eclipse Java application development](service-fabric-get-started-eclipse.md).
 
-
-## Install the .NET Core SDK (optional, if you want to use the .NET Core programming models)
-The .NET Core SDK provides the libraries and templates that are required to build Service Fabric services with .NET Core. Install the .NET Core SDK package by running the following -
-
-   ```bash
-   sudo apt-get install servicefabricsdkcsharp
-   ```
-
 ## Update the SDK and runtime
 
-To update to the latest version of the SDK and runtime, run the following commands (deselect the SDKs that you don't want):
+To update to the latest version of the SDK and runtime, run the following commands:
 
 ```bash
 sudo apt-get update
-sudo apt-get install servicefabric servicefabricsdkcommon servicefabricsdkcsharp
+sudo apt-get install servicefabric servicefabricsdkcommon
 ```
 To update the Java SDK binaries from Maven, you need to update the version details of the corresponding binary in the ``build.gradle`` file to point to the latest version. To know exactly where you need to update the version, you can refer to any ``build.gradle`` file in Service Fabric getting-started samples [here](https://github.com/Azure-Samples/service-fabric-java-getting-started).
 
 > [!NOTE]
 > Updating the packages might cause your local development cluster to stop running. Restart your local cluster after an upgrade by following the instructions on this page.
+
+## Remove the SDK
+To remove the Service Fabric SDKs, run the following:
+
+```bash
+sudo apt-get remove servicefabric servicefabicsdkcommon
+sudo npm uninstall generator-azuresfcontainer
+sudo npm uninstall generator-azuresfguest
+sudo apt-get install -f
+```
 
 ## Next steps
 
@@ -187,6 +193,7 @@ To update the Java SDK binaries from Maven, you need to update the version detai
     * [CSharp application](service-fabric-create-your-first-linux-application-with-csharp.md)
     * [Container application](service-fabric-get-started-containers-linux.md)
 * [Prepare your development environment on OSX](service-fabric-get-started-mac.md)
+* [Prepare a Linux development environment on Windows](service-fabric-local-linux-cluster-windows.md)
 * [Use the Service Fabric CLI to manage your applications](service-fabric-application-lifecycle-sfctl.md)
 * [Service Fabric Windows/Linux differences](service-fabric-linux-windows-differences.md)
 * [Get started with Service Fabric CLI](service-fabric-cli.md)
